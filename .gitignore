@@ -1,0 +1,14 @@
+#ignore all files except source and header
+*
+!/**/
+!**.c
+!**.h
+!**.md
+!.gitignore
+!makefile
+!**.java
+!**.sql
+!**.odt
+!**.dia
+
+/.metadata/
