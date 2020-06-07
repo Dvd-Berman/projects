@@ -407,9 +407,9 @@ public class Server implements Runnable {
 				ByteBuffer messageBuffer) throws IOException {
 			String inputmessage = (String) message.getKey();
 			if(inputmessage.equals(PING)) {
-				messageBuffer.put(Message.toByteArray(pongMessage));
+				messageBuffer.put(ObjectConvertUtil.toByteArray(pongMessage));
 			} else if(inputmessage.equals(PONG)) {
-				messageBuffer.put(Message.toByteArray(pingMessage));
+				messageBuffer.put(ObjectConvertUtil.toByteArray(pingMessage));
 			}		
 		}
 
@@ -601,7 +601,7 @@ public class Server implements Runnable {
 		private void fillBufferWithReturnMessage(ByteBuffer messageBuffer,
 				ChatServerMessage chatMessage) throws IOException {
 			ServerMessage returnMessage = new ServerMessage(ProtocolType.CHAT_SERVER, chatMessage);
-			messageBuffer.put(Message.toByteArray(returnMessage));
+			messageBuffer.put(ObjectConvertUtil.toByteArray(returnMessage));
 		}
 	}
 
@@ -626,7 +626,7 @@ public class Server implements Runnable {
 			byte[] byteArr = messageBuffer.array();
 			@SuppressWarnings("unchecked")
 			Message<ProtocolType, Message<?, ?>> message = 
-					(Message<ProtocolType, Message<?, ?>>) Message.toObject(byteArr); 	
+					(Message<ProtocolType, Message<?, ?>>) ObjectConvertUtil.toObject(byteArr); 	
 			protocolMap.get(message.getKey()).handleMessage
 			(clientInfoWrapper, message.getData(), messageBuffer);
 		}
